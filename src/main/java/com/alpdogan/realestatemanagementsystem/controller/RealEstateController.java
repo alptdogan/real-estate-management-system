@@ -1,6 +1,7 @@
 package com.alpdogan.realestatemanagementsystem.controller;
 
 import com.alpdogan.realestatemanagementsystem.dto.request.SaveRealEstateRequestDto;
+import com.alpdogan.realestatemanagementsystem.dto.request.UpdateRealEstateRequestDto;
 import com.alpdogan.realestatemanagementsystem.dto.response.RealEstateResponseDto;
 import com.alpdogan.realestatemanagementsystem.entity.RealEstate;
 import com.alpdogan.realestatemanagementsystem.service.RealEstateService;
@@ -32,6 +33,11 @@ public class RealEstateController {
     @GetMapping
     public List<RealEstateResponseDto> getAllRealEstates() {
         return realEstateService.getAllRealEstates();
+    }
+
+    @PutMapping("/updateRealEstateById")
+    public RealEstate updateRealEstateById(@RequestBody UpdateRealEstateRequestDto updateRealEstateRequestDto) {
+        return realEstateService.updateRealEstateById(updateRealEstateRequestDto);
     }
 
     @DeleteMapping("/{realEstateId}")

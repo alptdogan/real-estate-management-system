@@ -1,6 +1,7 @@
 package com.alpdogan.realestatemanagementsystem.service;
 
 import com.alpdogan.realestatemanagementsystem.dto.request.SaveRealEstateRequestDto;
+import com.alpdogan.realestatemanagementsystem.dto.request.UpdateRealEstateRequestDto;
 import com.alpdogan.realestatemanagementsystem.dto.response.RealEstateResponseDto;
 import com.alpdogan.realestatemanagementsystem.entity.RealEstate;
 import com.alpdogan.realestatemanagementsystem.repository.RealEstateRepository;
@@ -54,6 +55,27 @@ public class RealEstateService {
         }
 
         return realEstateResponseDtos;
+
+    }
+
+    public RealEstate updateRealEstateById(UpdateRealEstateRequestDto updateRealEstateRequestDto) {
+
+        int realEstateIdRequest = updateRealEstateRequestDto.getRealEstateId();
+        String realEstateNameRequest = updateRealEstateRequestDto.getRealEstateName();
+        int squareMetersRequest = updateRealEstateRequestDto.getSquareMeters();
+        int numberOfRoomsRequest = updateRealEstateRequestDto.getNumberOfRooms();
+        int floorNoRequest = updateRealEstateRequestDto.getFloorNo();
+
+        Optional<RealEstate> realEstateOptional = realEstateRepository.findById(realEstateIdRequest);
+
+        RealEstate realEstate = realEstateOptional.get();
+
+        realEstate.setRealEstateName(realEstateNameRequest);
+        realEstate.setSquareMeters(squareMetersRequest);
+        realEstate.setNumberOfRooms(numberOfRoomsRequest);
+        realEstate.setFloorNo(floorNoRequest);
+
+        return realEstateRepository.save(realEstate);
 
     }
 
