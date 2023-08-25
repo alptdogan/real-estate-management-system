@@ -1,5 +1,6 @@
 package com.alpdogan.realestatemanagementsystem.controller;
 
+import com.alpdogan.realestatemanagementsystem.dto.request.SaveRealEstateRequestDto;
 import com.alpdogan.realestatemanagementsystem.entity.RealEstate;
 import com.alpdogan.realestatemanagementsystem.service.RealEstateService;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +19,8 @@ public class RealEstateController {
     }
 
     @PostMapping("/addRealEstate")
-    public RealEstate addRealEstate(@RequestBody RealEstate realEstate) {
-        return realEstateService.saveRealEstate(realEstate);
+    public RealEstate addRealEstate(@RequestBody SaveRealEstateRequestDto saveRealEstateRequestDto) {
+        return realEstateService.saveRealEstate(saveRealEstateRequestDto);
     }
 
     @GetMapping("{realEstateId}")
