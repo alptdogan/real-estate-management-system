@@ -28,4 +28,8 @@ public class RealEstateService {
         return realEstateRepository.findAll();
     }
 
+    public void deleteRealEstateById(int realEstateId) {
+        realEstateRepository.deleteById(realEstateId);
+    }
+
 }

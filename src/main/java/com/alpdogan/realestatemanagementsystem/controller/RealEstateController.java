@@ -32,4 +32,9 @@ public class RealEstateController {
         return realEstateService.getAllRealEstates();
     }
 
+    @DeleteMapping("/{realEstateId}")
+    public void deleteRealEstateById(@PathVariable int realEstateId) {
+        realEstateService.deleteRealEstateById(realEstateId);
+    }
+
 }
