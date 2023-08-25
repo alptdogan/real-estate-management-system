@@ -1,5 +1,6 @@
 package com.alpdogan.realestatemanagementsystem.service;
 
+import com.alpdogan.realestatemanagementsystem.dto.request.SaveRealEstateRequestDto;
 import com.alpdogan.realestatemanagementsystem.entity.RealEstate;
 import com.alpdogan.realestatemanagementsystem.repository.RealEstateRepository;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,20 @@ public class RealEstateService {
         this.realEstateRepository = realEstateRepository;
     }
 
-    public RealEstate saveRealEstate(RealEstate realEstate){
+    public RealEstate saveRealEstate(SaveRealEstateRequestDto saveRealEstateRequestDto){
+
+        String realEstateNameRequest = saveRealEstateRequestDto.getRealEstateName();
+        int squareMetersRequest = saveRealEstateRequestDto.getSquareMeters();
+        int numberOfRoomsRequest = saveRealEstateRequestDto.getNumberOfRooms();
+        int floorNoRequest = saveRealEstateRequestDto.getFloorNo();
+
+        RealEstate realEstate = new RealEstate();
+
+        realEstate.setRealEstateName(realEstateNameRequest);
+        realEstate.setSquareMeters(squareMetersRequest);
+        realEstate.setNumberOfRooms(numberOfRoomsRequest);
+        realEstate.setFloorNo(floorNoRequest);
+
         return realEstateRepository.save(realEstate);
     }
 
