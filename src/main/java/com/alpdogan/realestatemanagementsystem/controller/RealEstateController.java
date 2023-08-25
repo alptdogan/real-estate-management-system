@@ -1,6 +1,7 @@
 package com.alpdogan.realestatemanagementsystem.controller;
 
 import com.alpdogan.realestatemanagementsystem.dto.request.SaveRealEstateRequestDto;
+import com.alpdogan.realestatemanagementsystem.dto.response.RealEstateResponseDto;
 import com.alpdogan.realestatemanagementsystem.entity.RealEstate;
 import com.alpdogan.realestatemanagementsystem.service.RealEstateService;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class RealEstateController {
     }
 
     @GetMapping
-    public List<RealEstate> getAllRealEstates() {
+    public List<RealEstateResponseDto> getAllRealEstates() {
         return realEstateService.getAllRealEstates();
     }
 
