@@ -2,8 +2,6 @@ package com.alpdogan.realestatemanagementsystem.dto.request;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-
 @Data
 public class SaveClientRequestDto {
 
@@ -11,5 +9,7 @@ public class SaveClientRequestDto {
     private String lastName;
     private long phoneNumber;
     private String emailAddress;
+
+    private int realEstateId;
 
 }

@@ -11,4 +11,7 @@ public class UpdateRealEstateRequestDto {
     private int numberOfRooms;
     private int floorNo;
 
+    private int clientId;
+    private String realEstateType;
+
 }

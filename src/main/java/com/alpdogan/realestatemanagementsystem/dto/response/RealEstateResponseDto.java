@@ -2,8 +2,6 @@ package com.alpdogan.realestatemanagementsystem.dto.response;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-
 @Data
 public class RealEstateResponseDto {
 
@@ -12,5 +10,8 @@ public class RealEstateResponseDto {
     private int squareMeters;
     private int numberOfRooms;
     private int floorNo;
+
+    private int clientId;
+    private String realEstateType;
 
 }
