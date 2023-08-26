@@ -10,6 +10,6 @@ public class SaveClientRequestDto {
     private long phoneNumber;
     private String emailAddress;
 
-    private int realEstateId;
+//    private int realEstateId;
 
 }
