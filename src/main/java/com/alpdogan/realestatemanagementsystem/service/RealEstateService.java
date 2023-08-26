@@ -97,4 +97,8 @@ public class RealEstateService {
         realEstateRepository.deleteById(realEstateId);
     }
 
+    public List<RealEstate> getRealEstateByNumberOfRooms(int numberOfRooms) {
+        return realEstateRepository.searchByNumberOfRooms(numberOfRooms);
+    }
+
 }

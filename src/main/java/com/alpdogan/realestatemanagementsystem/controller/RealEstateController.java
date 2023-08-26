@@ -45,4 +45,9 @@ public class RealEstateController {
         realEstateService.deleteRealEstateById(realEstateId);
     }
 
+    @GetMapping("/numberOfRooms/{numberOfRooms}")
+    public List<RealEstate> getRealEstateByNumberOfRooms(@PathVariable int numberOfRooms) {
+        return realEstateService.getRealEstateByNumberOfRooms(numberOfRooms);
+    }
+
 }
