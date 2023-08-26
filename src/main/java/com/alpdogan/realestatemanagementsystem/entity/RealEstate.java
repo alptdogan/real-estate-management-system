@@ -11,8 +11,8 @@ public class RealEstate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
-    private int id;
+    @Column (name = "real_estate_id")
+    private int realEstateId;
 
     @Column(name = "real_estate_name")
     private String realEstateName;
