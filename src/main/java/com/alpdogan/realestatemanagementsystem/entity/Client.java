@@ -3,6 +3,8 @@ package com.alpdogan.realestatemanagementsystem.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -25,5 +27,14 @@ public class Client {
 
     @Column(name = "email_address")
     private String emailAddress;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.DETACH,
+            CascadeType.REFRESH
+    })
+    @Column(name = "real_estates")
+    private List<RealEstate> realEstates = new ArrayList<>();
 
 }
