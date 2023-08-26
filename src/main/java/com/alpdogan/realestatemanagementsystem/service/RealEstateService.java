@@ -3,7 +3,10 @@ package com.alpdogan.realestatemanagementsystem.service;
 import com.alpdogan.realestatemanagementsystem.dto.request.SaveRealEstateRequestDto;
 import com.alpdogan.realestatemanagementsystem.dto.request.UpdateRealEstateRequestDto;
 import com.alpdogan.realestatemanagementsystem.dto.response.RealEstateResponseDto;
+import com.alpdogan.realestatemanagementsystem.entity.Client;
+import com.alpdogan.realestatemanagementsystem.entity.ERealEstateType;
 import com.alpdogan.realestatemanagementsystem.entity.RealEstate;
+import com.alpdogan.realestatemanagementsystem.repository.ClientRepository;
 import com.alpdogan.realestatemanagementsystem.repository.RealEstateRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -17,10 +20,12 @@ public class RealEstateService {
 
     private RealEstateRepository realEstateRepository;
     private ModelMapper modelMapper;
+    private ClientRepository clientRepository;
 
-    public RealEstateService(RealEstateRepository realEstateRepository, ModelMapper modelMapper) {
+    public RealEstateService(RealEstateRepository realEstateRepository, ModelMapper modelMapper, ClientRepository clientRepository) {
         this.realEstateRepository = realEstateRepository;
         this.modelMapper = modelMapper;
+        this.clientRepository = clientRepository;
     }
 
     public RealEstate saveRealEstate(SaveRealEstateRequestDto saveRealEstateRequestDto){
@@ -29,13 +34,18 @@ public class RealEstateService {
         int squareMetersRequest = saveRealEstateRequestDto.getSquareMeters();
         int numberOfRoomsRequest = saveRealEstateRequestDto.getNumberOfRooms();
         int floorNoRequest = saveRealEstateRequestDto.getFloorNo();
+        int clientIdRequest = saveRealEstateRequestDto.getClientId();
+        String realEstateTypeRequest = saveRealEstateRequestDto.getRealEstateType();
 
         RealEstate realEstate = new RealEstate();
+        Client client = clientRepository.findById(clientIdRequest).get();
 
         realEstate.setRealEstateName(realEstateNameRequest);
         realEstate.setSquareMeters(squareMetersRequest);
         realEstate.setNumberOfRooms(numberOfRoomsRequest);
         realEstate.setFloorNo(floorNoRequest);
+        realEstate.setClient(client);
+        realEstate.setERealEstateType(ERealEstateType.valueOf(realEstateTypeRequest));
 
         return realEstateRepository.save(realEstate);
     }
@@ -65,6 +75,8 @@ public class RealEstateService {
         int squareMetersRequest = updateRealEstateRequestDto.getSquareMeters();
         int numberOfRoomsRequest = updateRealEstateRequestDto.getNumberOfRooms();
         int floorNoRequest = updateRealEstateRequestDto.getFloorNo();
+        int clientIdRequest = updateRealEstateRequestDto.getClientId();
+        String realEstateTypeRequest = updateRealEstateRequestDto.getRealEstateType();
 
         Optional<RealEstate> realEstateOptional = realEstateRepository.findById(realEstateIdRequest);
 
@@ -74,6 +86,8 @@ public class RealEstateService {
         realEstate.setSquareMeters(squareMetersRequest);
         realEstate.setNumberOfRooms(numberOfRoomsRequest);
         realEstate.setFloorNo(floorNoRequest);
+        realEstate.getClient().setClientId(clientIdRequest);
+        realEstate.setERealEstateType(ERealEstateType.valueOf(realEstateTypeRequest));
 
         return realEstateRepository.save(realEstate);
 
