@@ -11,6 +11,8 @@ import java.util.Optional;
 @Service
 public class ClientService {
 
+    //update eklenebilir.
+
     private ClientRepository clientRepository;
     private RealEstateRepository realEstateRepository;
 
@@ -42,6 +44,10 @@ public class ClientService {
 
     public Optional<Client> getClientById(int clientId) {
         return clientRepository.findById(clientId);
+    }
+
+    public void deleteClientById(int clientId) {
+        clientRepository.deleteById(clientId);
     }
 
 }
