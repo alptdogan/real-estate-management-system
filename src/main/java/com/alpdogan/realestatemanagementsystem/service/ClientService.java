@@ -2,12 +2,11 @@ package com.alpdogan.realestatemanagementsystem.service;
 
 import com.alpdogan.realestatemanagementsystem.dto.request.SaveClientRequestDto;
 import com.alpdogan.realestatemanagementsystem.entity.Client;
-import com.alpdogan.realestatemanagementsystem.entity.RealEstate;
 import com.alpdogan.realestatemanagementsystem.repository.ClientRepository;
 import com.alpdogan.realestatemanagementsystem.repository.RealEstateRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -39,6 +38,10 @@ public class ClientService {
 
         return clientRepository.save(client);
 
+    }
+
+    public Optional<Client> getClientById(int clientId) {
+        return clientRepository.findById(clientId);
     }
 
 }
