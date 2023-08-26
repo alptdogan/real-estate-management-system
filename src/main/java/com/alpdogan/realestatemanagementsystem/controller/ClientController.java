@@ -1,10 +1,12 @@
 package com.alpdogan.realestatemanagementsystem.controller;
 
 import com.alpdogan.realestatemanagementsystem.dto.request.SaveClientRequestDto;
+import com.alpdogan.realestatemanagementsystem.dto.response.ClientResponseDto;
 import com.alpdogan.realestatemanagementsystem.entity.Client;
 import com.alpdogan.realestatemanagementsystem.service.ClientService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -25,6 +27,11 @@ public class ClientController {
     @GetMapping("/{clientId}")
     public Optional<Client> getClientById(@PathVariable int clientId) {
         return clientService.getClientById(clientId);
+    }
+
+    @GetMapping
+    public List<ClientResponseDto> getAllClients() {
+        return clientService.getAllClients();
     }
 
     @DeleteMapping("/{clientId}")

@@ -1,11 +1,15 @@
 package com.alpdogan.realestatemanagementsystem.service;
 
 import com.alpdogan.realestatemanagementsystem.dto.request.SaveClientRequestDto;
+import com.alpdogan.realestatemanagementsystem.dto.response.ClientResponseDto;
 import com.alpdogan.realestatemanagementsystem.entity.Client;
 import com.alpdogan.realestatemanagementsystem.repository.ClientRepository;
 import com.alpdogan.realestatemanagementsystem.repository.RealEstateRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,10 +19,12 @@ public class ClientService {
 
     private ClientRepository clientRepository;
     private RealEstateRepository realEstateRepository;
+    private ModelMapper modelMapper;
 
-    public ClientService(ClientRepository clientRepository, RealEstateRepository realEstateRepository) {
+    public ClientService(ClientRepository clientRepository, RealEstateRepository realEstateRepository, ModelMapper modelMapper) {
         this.clientRepository = clientRepository;
         this.realEstateRepository = realEstateRepository;
+        this.modelMapper = modelMapper;
     }
 
     public Client saveClient(SaveClientRequestDto saveClientRequestDto) {
@@ -39,6 +45,20 @@ public class ClientService {
 //        client.setRealEstates(Collections.singletonList(realEstate));
 
         return clientRepository.save(client);
+
+    }
+
+    public List<ClientResponseDto> getAllClients() {
+
+        Iterable<Client> clients = clientRepository.findAll();
+        List<ClientResponseDto> clientResponseDtos = new ArrayList<>();
+
+        for(Client client : clients) {
+            ClientResponseDto clientResponseDto = modelMapper.map(client, ClientResponseDto.class);
+            clientResponseDtos.add(clientResponseDto);
+        }
+
+        return clientResponseDtos;
 
     }
 
