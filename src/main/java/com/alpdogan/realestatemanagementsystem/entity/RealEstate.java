@@ -9,8 +9,6 @@ import javax.persistence.*;
 @Table(name = "real_estate")
 public class RealEstate {
 
-    //buraya gerektikçe yeni fieldlar gelecek. emlak türünü enum yapabilirim.
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id")
@@ -27,5 +25,19 @@ public class RealEstate {
 
     @Column(name = "floor_no")
     private int floorNo;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.DETACH,
+            CascadeType.REFRESH
+    })
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "real_estate_type")
+    private ERealEstateType eRealEstateType;
+
 
 }
