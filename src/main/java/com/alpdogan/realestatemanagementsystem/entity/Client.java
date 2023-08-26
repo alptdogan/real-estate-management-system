@@ -1,5 +1,6 @@
 package com.alpdogan.realestatemanagementsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -28,13 +29,17 @@ public class Client {
     @Column(name = "email_address")
     private String emailAddress;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE,
-            CascadeType.DETACH,
-            CascadeType.REFRESH
-    })
-    @Column(name = "real_estates")
-    private List<RealEstate> realEstates = new ArrayList<>();
+//    @OneToMany
+//    @JsonIgnore
+//    private List<RealEstate> realEstates = new ArrayList<>();
+
+//    @OneToMany(fetch = FetchType.LAZY, cascade = {
+//            CascadeType.PERSIST,
+//            CascadeType.MERGE,
+//            CascadeType.DETACH,
+//            CascadeType.REFRESH
+//    })
+//    @Column(name = "real_estates")
+//    private List<RealEstate> realEstates = new ArrayList<>();
 
 }

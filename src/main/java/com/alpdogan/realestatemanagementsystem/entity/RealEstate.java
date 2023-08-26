@@ -26,14 +26,17 @@ public class RealEstate {
     @Column(name = "floor_no")
     private int floorNo;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE,
-            CascadeType.DETACH,
-            CascadeType.REFRESH
-    })
-    @JoinColumn(name = "client_id")
+    @ManyToOne
     private Client client;
+
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {
+//            CascadeType.PERSIST,
+//            CascadeType.MERGE,
+//            CascadeType.DETACH,
+//            CascadeType.REFRESH
+//    })
+//    @JoinColumn(name = "client_id")
+//    private Client client;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "real_estate_type")
