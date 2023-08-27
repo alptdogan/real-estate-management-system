@@ -3,6 +3,7 @@ package com.alpdogan.realestatemanagementsystem.service;
 import com.alpdogan.realestatemanagementsystem.dto.request.SaveRealEstateRequestDto;
 import com.alpdogan.realestatemanagementsystem.dto.request.UpdateRealEstateRequestDto;
 import com.alpdogan.realestatemanagementsystem.dto.response.RealEstateResponseDto;
+import com.alpdogan.realestatemanagementsystem.dto.response.TypeRealEstateResponseDto;
 import com.alpdogan.realestatemanagementsystem.entity.Client;
 import com.alpdogan.realestatemanagementsystem.entity.ERealEstateType;
 import com.alpdogan.realestatemanagementsystem.entity.RealEstate;
@@ -68,6 +69,20 @@ public class RealEstateService {
 
     }
 
+    public List<TypeRealEstateResponseDto> getRealEstateByRealEstateType(ERealEstateType realEstateType) {
+
+        Iterable<RealEstate> realEstates = realEstateRepository.searchByRealEstateType(realEstateType);
+        List<TypeRealEstateResponseDto> typeRealEstateResponseDtos = new ArrayList<>();
+
+        for(RealEstate realEstate : realEstates) {
+            TypeRealEstateResponseDto typeRealEstateResponseDto = modelMapper.map(realEstate, TypeRealEstateResponseDto.class);
+            typeRealEstateResponseDtos.add(typeRealEstateResponseDto);
+        }
+
+        return typeRealEstateResponseDtos;
+
+    }
+
     public RealEstate updateRealEstateById(UpdateRealEstateRequestDto updateRealEstateRequestDto) {
 
         int realEstateIdRequest = updateRealEstateRequestDto.getRealEstateId();
@@ -100,5 +115,15 @@ public class RealEstateService {
     public List<RealEstate> getRealEstateByNumberOfRooms(int numberOfRooms) {
         return realEstateRepository.searchByNumberOfRooms(numberOfRooms);
     }
+
+    public List<RealEstate> getRealEstateBySquareMeters(int squareMeters) {
+        return realEstateRepository.searchBySquareMeters(squareMeters);
+    }
+
+    public List<RealEstate> getRealEstateByFloorNo(int floorNo) {
+        return realEstateRepository.searchByFloorNo(floorNo);
+    }
+
+
 
 }
