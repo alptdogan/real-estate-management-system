@@ -66,4 +66,29 @@ public class RealEstateController {
         return realEstateService.getRealEstateByRealEstateType(realEstateType);
     }
 
+    @GetMapping("/getRealEstateByItsFields")
+    public List<RealEstateResponseDto> getRealEstatesByItsProperties(@RequestParam int numberOfRooms,
+                                                                @RequestParam int floorNo,
+                                                                @RequestParam int squareMeters,
+                                                                @RequestParam ERealEstateType eRealEstateType) {
+        return realEstateService.getRealEstatesByItsProperties(numberOfRooms, floorNo, squareMeters, eRealEstateType);
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

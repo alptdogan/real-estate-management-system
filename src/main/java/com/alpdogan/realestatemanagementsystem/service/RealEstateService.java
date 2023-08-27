@@ -68,20 +68,6 @@ public class RealEstateService {
 
     }
 
-    public List<RealEstateResponseDto> getRealEstateByRealEstateType(ERealEstateType realEstateType) {
-
-        Iterable<RealEstate> realEstates = realEstateRepository.searchByRealEstateType(realEstateType);
-        List<RealEstateResponseDto> typeRealEstateResponseDtos = new ArrayList<>();
-
-        for(RealEstate realEstate : realEstates) {
-            RealEstateResponseDto typeRealEstateResponseDto = modelMapper.map(realEstate, RealEstateResponseDto.class);
-            typeRealEstateResponseDtos.add(typeRealEstateResponseDto);
-        }
-
-        return typeRealEstateResponseDtos;
-
-    }
-
     public RealEstate updateRealEstateById(UpdateRealEstateRequestDto updateRealEstateRequestDto) {
 
         int realEstateIdRequest = updateRealEstateRequestDto.getRealEstateId();
@@ -123,6 +109,32 @@ public class RealEstateService {
         return realEstateRepository.searchByFloorNo(floorNo);
     }
 
+    public List<RealEstateResponseDto> getRealEstateByRealEstateType(ERealEstateType realEstateType) {
 
+        Iterable<RealEstate> realEstates = realEstateRepository.searchByRealEstateType(realEstateType);
+        List<RealEstateResponseDto> typeRealEstateResponseDtos = new ArrayList<>();
+
+        for(RealEstate realEstate : realEstates) {
+            RealEstateResponseDto typeRealEstateResponseDto = modelMapper.map(realEstate, RealEstateResponseDto.class);
+            typeRealEstateResponseDtos.add(typeRealEstateResponseDto);
+        }
+
+        return typeRealEstateResponseDtos;
+
+    }
+
+    public List<RealEstateResponseDto> getRealEstatesByItsProperties(int numberOfRooms, int floorNo, int squareMeters, ERealEstateType eRealEstateType) {
+
+        List<RealEstate> realEstates = realEstateRepository.findRealEstatesByItsProperties(numberOfRooms, floorNo, squareMeters, eRealEstateType);
+        List<RealEstateResponseDto> typeRealEstateResponseDtos = new ArrayList<>();
+
+        for(RealEstate realEstate : realEstates) {
+            RealEstateResponseDto typeRealEstateResponseDto = modelMapper.map(realEstate, RealEstateResponseDto.class);
+            typeRealEstateResponseDtos.add(typeRealEstateResponseDto);
+        }
+
+        return typeRealEstateResponseDtos;
+
+    }
 
 }
