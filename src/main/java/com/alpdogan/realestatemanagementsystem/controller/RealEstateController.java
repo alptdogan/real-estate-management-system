@@ -66,7 +66,7 @@ public class RealEstateController {
         return realEstateService.getRealEstateByRealEstateType(realEstateType);
     }
 
-    @GetMapping("/getRealEstateByItsFields")
+    @GetMapping("/getRealEstatesByItsProperties")
     public List<RealEstateResponseDto> getRealEstatesByItsProperties(@RequestParam int numberOfRooms,
                                                                 @RequestParam int floorNo,
                                                                 @RequestParam int squareMeters,
