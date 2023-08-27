@@ -19,10 +19,18 @@ public interface RealEstateRepository extends JpaRepository<RealEstate, Integer>
     @Query("SELECT re FROM RealEstate re WHERE re.floorNo = :floorNo")
     List<RealEstate> searchByFloorNo(@Param("floorNo") int floorNo);
 
-//    @Query("SELECT re FROM RealEstate re WHERE re.eRealEstateType = :eRealEstateType")
-//    List<RealEstate> searchByRealEstateType();
-
     @Query("SELECT re FROM RealEstate re WHERE re.eRealEstateType = :eRealEstateType")
     List<RealEstate> searchByRealEstateType(@Param("eRealEstateType") ERealEstateType eRealEstateType);
 
+    @Query("SELECT re FROM RealEstate re " +
+            "WHERE re.numberOfRooms = :numberOfRooms " +
+            "AND re.floorNo = :floorNo " +
+            "AND re.squareMeters = :squareMeters " +
+            "AND re.eRealEstateType = :eRealEstateType")
+    List<RealEstate> findRealEstatesByItsProperties(@Param("numberOfRooms") int numberOfRooms,
+                                                @Param("floorNo") int floorNo,
+                                                @Param("squareMeters") int squareMeters,
+                                                @Param("eRealEstateType") ERealEstateType realEstateType);
+
 }
+
