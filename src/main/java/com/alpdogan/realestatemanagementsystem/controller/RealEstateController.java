@@ -3,7 +3,6 @@ package com.alpdogan.realestatemanagementsystem.controller;
 import com.alpdogan.realestatemanagementsystem.dto.request.SaveRealEstateRequestDto;
 import com.alpdogan.realestatemanagementsystem.dto.request.UpdateRealEstateRequestDto;
 import com.alpdogan.realestatemanagementsystem.dto.response.RealEstateResponseDto;
-import com.alpdogan.realestatemanagementsystem.dto.response.TypeRealEstateResponseDto;
 import com.alpdogan.realestatemanagementsystem.entity.ERealEstateType;
 import com.alpdogan.realestatemanagementsystem.entity.RealEstate;
 import com.alpdogan.realestatemanagementsystem.service.RealEstateService;
@@ -63,7 +62,7 @@ public class RealEstateController {
     }
 
     @GetMapping("/realEstateType/{realEstateType}")
-    public List<TypeRealEstateResponseDto> getRealEstateByRealEstateType(@PathVariable ERealEstateType realEstateType) {
+    public List<RealEstateResponseDto> getRealEstateByRealEstateType(@PathVariable ERealEstateType realEstateType) {
         return realEstateService.getRealEstateByRealEstateType(realEstateType);
     }
 

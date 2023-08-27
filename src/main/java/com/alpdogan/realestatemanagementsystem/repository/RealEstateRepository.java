@@ -1,6 +1,5 @@
 package com.alpdogan.realestatemanagementsystem.repository;
 
-import com.alpdogan.realestatemanagementsystem.dto.response.TypeRealEstateResponseDto;
 import com.alpdogan.realestatemanagementsystem.entity.ERealEstateType;
 import com.alpdogan.realestatemanagementsystem.entity.RealEstate;
 import org.springframework.data.jpa.repository.JpaRepository;

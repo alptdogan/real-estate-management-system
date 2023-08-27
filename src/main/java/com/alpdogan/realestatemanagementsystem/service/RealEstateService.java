@@ -3,7 +3,6 @@ package com.alpdogan.realestatemanagementsystem.service;
 import com.alpdogan.realestatemanagementsystem.dto.request.SaveRealEstateRequestDto;
 import com.alpdogan.realestatemanagementsystem.dto.request.UpdateRealEstateRequestDto;
 import com.alpdogan.realestatemanagementsystem.dto.response.RealEstateResponseDto;
-import com.alpdogan.realestatemanagementsystem.dto.response.TypeRealEstateResponseDto;
 import com.alpdogan.realestatemanagementsystem.entity.Client;
 import com.alpdogan.realestatemanagementsystem.entity.ERealEstateType;
 import com.alpdogan.realestatemanagementsystem.entity.RealEstate;
@@ -69,13 +68,13 @@ public class RealEstateService {
 
     }
 
-    public List<TypeRealEstateResponseDto> getRealEstateByRealEstateType(ERealEstateType realEstateType) {
+    public List<RealEstateResponseDto> getRealEstateByRealEstateType(ERealEstateType realEstateType) {
 
         Iterable<RealEstate> realEstates = realEstateRepository.searchByRealEstateType(realEstateType);
-        List<TypeRealEstateResponseDto> typeRealEstateResponseDtos = new ArrayList<>();
+        List<RealEstateResponseDto> typeRealEstateResponseDtos = new ArrayList<>();
 
         for(RealEstate realEstate : realEstates) {
-            TypeRealEstateResponseDto typeRealEstateResponseDto = modelMapper.map(realEstate, TypeRealEstateResponseDto.class);
+            RealEstateResponseDto typeRealEstateResponseDto = modelMapper.map(realEstate, RealEstateResponseDto.class);
             typeRealEstateResponseDtos.add(typeRealEstateResponseDto);
         }
 
