@@ -22,17 +22,18 @@ public class SecurityConfiguration {
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
 
-        UserDetails client = User.withDefaultPasswordEncoder()
-                .username("client")
-                .password("client")
-                .roles("CLIENT")
-                .build();
+//        UserDetails client = User.withDefaultPasswordEncoder()
+//                .username("client")
+//                .password("client")
+//                .roles("CLIENT")
+//                .build();
         UserDetails admin = User.withDefaultPasswordEncoder()
                 .username("admin")
                 .password("admin")
                 .roles("ADMIN")
                 .build();
-        return new InMemoryUserDetailsManager(client, admin);
+//        return new InMemoryUserDetailsManager(client, admin);
+        return new InMemoryUserDetailsManager(admin);
 
     }
 
@@ -45,6 +46,11 @@ public class SecurityConfiguration {
                 .authorizeRequests(auth -> {
                     try {
                         auth.antMatchers("/home").permitAll()
+
+                                .antMatchers("/realEstates/**").hasRole("ADMIN")
+
+                                .antMatchers("/clients/**").hasRole("ADMIN")
+
                                 .antMatchers("/dashboard").authenticated()
                                 .and().formLogin().loginPage("/login")
                                 .defaultSuccessUrl("/dashboard").failureUrl("/login?error=true").permitAll()
