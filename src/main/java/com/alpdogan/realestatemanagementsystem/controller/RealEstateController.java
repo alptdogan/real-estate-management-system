@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/real_estates")
+@RequestMapping("/realEstates")
 public class RealEstateController {
 
     private RealEstateService realEstateService;
