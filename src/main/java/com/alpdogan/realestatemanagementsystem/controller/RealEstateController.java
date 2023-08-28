@@ -83,6 +83,13 @@ public class RealEstateController {
         return realEstateService.getRealEstateByTown(town);
     }
 
+    @GetMapping("/getRealEstatesByItsEnumeratedProperties")
+    public List<RealEstateResponseDto> getRealEstatesByItsEnumeratedProperties(@RequestParam ERealEstateType eRealEstateType,
+                                                                     @RequestParam ESaleOrRent eSaleOrRent,
+                                                                     @RequestParam ETown eTown) {
+        return realEstateService.getRealEstatesByItsEnumeratedProperties(eRealEstateType, eSaleOrRent, eTown);
+    }
+
     @GetMapping("/getRealEstatesByItsProperties")
     public List<RealEstateResponseDto> getRealEstatesByItsProperties(@RequestParam int numberOfRooms,
                                                                      @RequestParam int floorNo,

@@ -169,6 +169,21 @@ public class RealEstateService {
 
     }
 
+    public List<RealEstateResponseDto> getRealEstatesByItsEnumeratedProperties(ERealEstateType eRealEstateType, ESaleOrRent saleOrRent, ETown town) {
+
+        List<RealEstate> realEstates = realEstateRepository
+                .findRealEstatesByItsEnumeratedProperties(eRealEstateType, saleOrRent, town);
+        List<RealEstateResponseDto> typeRealEstateResponseDtos = new ArrayList<>();
+
+        for(RealEstate realEstate : realEstates) {
+            RealEstateResponseDto typeRealEstateResponseDto = modelMapper.map(realEstate, RealEstateResponseDto.class);
+            typeRealEstateResponseDtos.add(typeRealEstateResponseDto);
+        }
+
+        return typeRealEstateResponseDtos;
+
+    }
+
     public List<RealEstateResponseDto> getRealEstatesByItsProperties(int numberOfRooms, int floorNo, int squareMeters,
                                                                      ERealEstateType eRealEstateType, ESaleOrRent saleOrRent, ETown town) {
 
