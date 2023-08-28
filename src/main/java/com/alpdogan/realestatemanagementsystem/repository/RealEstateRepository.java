@@ -33,6 +33,13 @@ public interface RealEstateRepository extends JpaRepository<RealEstate, Integer>
     @Query("SELECT re FROM RealEstate re WHERE re.eTown = :eTown")
     List<RealEstate> searchByTown(@Param("eTown") ETown eTown);
 
+    @Query("SELECT re FROM RealEstate re " +
+            "WHERE re.eRealEstateType = :eRealEstateType " +
+            "AND re.eSaleOrRent = :eSaleOrRent " +
+            "AND re.eTown = :eTown")
+    List<RealEstate> findRealEstatesByItsEnumeratedProperties(@Param("eRealEstateType") ERealEstateType realEstateType,
+                                                    @Param("eSaleOrRent") ESaleOrRent saleOrRent,
+                                                    @Param("eTown") ETown town);
 
     @Query("SELECT re FROM RealEstate re " +
             "WHERE re.numberOfRooms = :numberOfRooms " +
@@ -40,7 +47,7 @@ public interface RealEstateRepository extends JpaRepository<RealEstate, Integer>
             "AND re.squareMeters = :squareMeters " +
             "AND re.eRealEstateType = :eRealEstateType " +
             "AND re.eSaleOrRent = :eSaleOrRent " +
-            "AND re.eTown = :eTown" )
+            "AND re.eTown = :eTown")
     List<RealEstate> findRealEstatesByItsProperties(@Param("numberOfRooms") int numberOfRooms,
                                                     @Param("floorNo") int floorNo,
                                                     @Param("squareMeters") int squareMeters,
