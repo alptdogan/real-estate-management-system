@@ -4,6 +4,8 @@ import com.alpdogan.realestatemanagementsystem.dto.request.SaveRealEstateRequest
 import com.alpdogan.realestatemanagementsystem.dto.request.UpdateRealEstateRequestDto;
 import com.alpdogan.realestatemanagementsystem.dto.response.RealEstateResponseDto;
 import com.alpdogan.realestatemanagementsystem.entity.ERealEstateType;
+import com.alpdogan.realestatemanagementsystem.entity.ESaleOrRent;
+import com.alpdogan.realestatemanagementsystem.entity.ETown;
 import com.alpdogan.realestatemanagementsystem.entity.RealEstate;
 import com.alpdogan.realestatemanagementsystem.service.RealEstateService;
 import org.springframework.web.bind.annotation.*;
@@ -61,17 +63,34 @@ public class RealEstateController {
         return realEstateService.getRealEstateByFloorNo(floorNo);
     }
 
+    @GetMapping("/price/{price}")
+    public List<RealEstate> getRealEstateByPrice(@PathVariable int price) {
+        return realEstateService.getRealEstateByPrice(price);
+    }
+
     @GetMapping("/realEstateType/{realEstateType}")
     public List<RealEstateResponseDto> getRealEstateByRealEstateType(@PathVariable ERealEstateType realEstateType) {
         return realEstateService.getRealEstateByRealEstateType(realEstateType);
     }
 
+    @GetMapping("/saleOrRent/{saleOrRent}")
+    public List<RealEstateResponseDto> getRealEstateBySaleOrRent (@PathVariable ESaleOrRent saleOrRent) {
+        return realEstateService.getRealEstateBySaleOrRent(saleOrRent);
+    }
+
+    @GetMapping("/town/{town}")
+    public List<RealEstateResponseDto> getRealEstateByTown(@PathVariable ETown town) {
+        return realEstateService.getRealEstateByTown(town);
+    }
+
     @GetMapping("/getRealEstatesByItsProperties")
     public List<RealEstateResponseDto> getRealEstatesByItsProperties(@RequestParam int numberOfRooms,
-                                                                @RequestParam int floorNo,
-                                                                @RequestParam int squareMeters,
-                                                                @RequestParam ERealEstateType eRealEstateType) {
-        return realEstateService.getRealEstatesByItsProperties(numberOfRooms, floorNo, squareMeters, eRealEstateType);
+                                                                     @RequestParam int floorNo,
+                                                                     @RequestParam int squareMeters,
+                                                                     @RequestParam ERealEstateType eRealEstateType,
+                                                                     @RequestParam ESaleOrRent eSaleOrRent,
+                                                                     @RequestParam ETown eTown) {
+        return realEstateService.getRealEstatesByItsProperties(numberOfRooms, floorNo, squareMeters, eRealEstateType, eSaleOrRent, eTown);
     }
 
 }
