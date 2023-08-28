@@ -3,9 +3,7 @@ package com.alpdogan.realestatemanagementsystem.service;
 import com.alpdogan.realestatemanagementsystem.dto.request.SaveRealEstateRequestDto;
 import com.alpdogan.realestatemanagementsystem.dto.request.UpdateRealEstateRequestDto;
 import com.alpdogan.realestatemanagementsystem.dto.response.RealEstateResponseDto;
-import com.alpdogan.realestatemanagementsystem.entity.Client;
-import com.alpdogan.realestatemanagementsystem.entity.ERealEstateType;
-import com.alpdogan.realestatemanagementsystem.entity.RealEstate;
+import com.alpdogan.realestatemanagementsystem.entity.*;
 import com.alpdogan.realestatemanagementsystem.repository.ClientRepository;
 import com.alpdogan.realestatemanagementsystem.repository.RealEstateRepository;
 import org.modelmapper.ModelMapper;
@@ -30,22 +28,30 @@ public class RealEstateService {
 
     public RealEstate saveRealEstate(SaveRealEstateRequestDto saveRealEstateRequestDto){
 
-        String realEstateNameRequest = saveRealEstateRequestDto.getRealEstateName();
+        String advertTitleRequest = saveRealEstateRequestDto.getAdvertTitle();
+        String realEstateAddressRequest = saveRealEstateRequestDto.getRealEstateAddress();
         int squareMetersRequest = saveRealEstateRequestDto.getSquareMeters();
         int numberOfRoomsRequest = saveRealEstateRequestDto.getNumberOfRooms();
         int floorNoRequest = saveRealEstateRequestDto.getFloorNo();
+        int priceRequest = saveRealEstateRequestDto.getPrice();
         int clientIdRequest = saveRealEstateRequestDto.getClientId();
         String realEstateTypeRequest = saveRealEstateRequestDto.getRealEstateType();
+        String saleOrRentRequest = saveRealEstateRequestDto.getSaleOrRent();
+        String townRequest = saveRealEstateRequestDto.getTown();
 
         RealEstate realEstate = new RealEstate();
         Client client = clientRepository.findById(clientIdRequest).get();
 
-        realEstate.setRealEstateName(realEstateNameRequest);
+        realEstate.setAdvertTitle(advertTitleRequest);
+        realEstate.setRealEstateAddress(realEstateAddressRequest);
         realEstate.setSquareMeters(squareMetersRequest);
         realEstate.setNumberOfRooms(numberOfRoomsRequest);
         realEstate.setFloorNo(floorNoRequest);
+        realEstate.setPrice(priceRequest);
         realEstate.setClient(client);
         realEstate.setERealEstateType(ERealEstateType.valueOf(realEstateTypeRequest));
+        realEstate.setESaleOrRent(ESaleOrRent.valueOf(saleOrRentRequest));
+        realEstate.setETown(ETown.valueOf(townRequest));
 
         return realEstateRepository.save(realEstate);
     }
@@ -71,23 +77,31 @@ public class RealEstateService {
     public RealEstate updateRealEstateById(UpdateRealEstateRequestDto updateRealEstateRequestDto) {
 
         int realEstateIdRequest = updateRealEstateRequestDto.getRealEstateId();
-        String realEstateNameRequest = updateRealEstateRequestDto.getRealEstateName();
+        String advertTitleRequest = updateRealEstateRequestDto.getAdvertTitle();
+        String realEstateAddressRequest = updateRealEstateRequestDto.getRealEstateAddress();
         int squareMetersRequest = updateRealEstateRequestDto.getSquareMeters();
         int numberOfRoomsRequest = updateRealEstateRequestDto.getNumberOfRooms();
         int floorNoRequest = updateRealEstateRequestDto.getFloorNo();
+        int priceRequest = updateRealEstateRequestDto.getPrice();
         int clientIdRequest = updateRealEstateRequestDto.getClientId();
         String realEstateTypeRequest = updateRealEstateRequestDto.getRealEstateType();
+        String saleOrRentRequest = updateRealEstateRequestDto.getSaleOrRent();
+        String townRequest = updateRealEstateRequestDto.getTown();
 
         Optional<RealEstate> realEstateOptional = realEstateRepository.findById(realEstateIdRequest);
 
         RealEstate realEstate = realEstateOptional.get();
 
-        realEstate.setRealEstateName(realEstateNameRequest);
+        realEstate.setAdvertTitle(advertTitleRequest);
+        realEstate.setRealEstateAddress(realEstateAddressRequest);
         realEstate.setSquareMeters(squareMetersRequest);
         realEstate.setNumberOfRooms(numberOfRoomsRequest);
         realEstate.setFloorNo(floorNoRequest);
+        realEstate.setPrice(priceRequest);
         realEstate.getClient().setClientId(clientIdRequest);
         realEstate.setERealEstateType(ERealEstateType.valueOf(realEstateTypeRequest));
+        realEstate.setESaleOrRent(ESaleOrRent.valueOf(saleOrRentRequest));
+        realEstate.setETown(ETown.valueOf(townRequest));
 
         return realEstateRepository.save(realEstate);
 
@@ -109,6 +123,10 @@ public class RealEstateService {
         return realEstateRepository.searchByFloorNo(floorNo);
     }
 
+    public List<RealEstate> getRealEstateByPrice(int price) {
+        return realEstateRepository.searchByPrice(price);
+    }
+
     public List<RealEstateResponseDto> getRealEstateByRealEstateType(ERealEstateType realEstateType) {
 
         Iterable<RealEstate> realEstates = realEstateRepository.searchByRealEstateType(realEstateType);
@@ -123,9 +141,39 @@ public class RealEstateService {
 
     }
 
-    public List<RealEstateResponseDto> getRealEstatesByItsProperties(int numberOfRooms, int floorNo, int squareMeters, ERealEstateType eRealEstateType) {
+    public List<RealEstateResponseDto> getRealEstateBySaleOrRent(ESaleOrRent saleOrRent) {
 
-        List<RealEstate> realEstates = realEstateRepository.findRealEstatesByItsProperties(numberOfRooms, floorNo, squareMeters, eRealEstateType);
+        Iterable<RealEstate> realEstates = realEstateRepository.searchBySaleOrRent(saleOrRent);
+        List<RealEstateResponseDto> typeRealEstateResponseDtos = new ArrayList<>();
+
+        for(RealEstate realEstate : realEstates) {
+            RealEstateResponseDto typeRealEstateResponseDto = modelMapper.map(realEstate, RealEstateResponseDto.class);
+            typeRealEstateResponseDtos.add(typeRealEstateResponseDto);
+        }
+
+        return typeRealEstateResponseDtos;
+
+    }
+
+    public List<RealEstateResponseDto> getRealEstateByTown(ETown town) {
+
+        Iterable<RealEstate> realEstates = realEstateRepository.searchByTown(town);
+        List<RealEstateResponseDto> typeRealEstateResponseDtos = new ArrayList<>();
+
+        for(RealEstate realEstate : realEstates) {
+            RealEstateResponseDto typeRealEstateResponseDto = modelMapper.map(realEstate, RealEstateResponseDto.class);
+            typeRealEstateResponseDtos.add(typeRealEstateResponseDto);
+        }
+
+        return typeRealEstateResponseDtos;
+
+    }
+
+    public List<RealEstateResponseDto> getRealEstatesByItsProperties(int numberOfRooms, int floorNo, int squareMeters,
+                                                                     ERealEstateType eRealEstateType, ESaleOrRent saleOrRent, ETown town) {
+
+        List<RealEstate> realEstates = realEstateRepository
+                .findRealEstatesByItsProperties(numberOfRooms, floorNo, squareMeters, eRealEstateType, saleOrRent, town);
         List<RealEstateResponseDto> typeRealEstateResponseDtos = new ArrayList<>();
 
         for(RealEstate realEstate : realEstates) {
