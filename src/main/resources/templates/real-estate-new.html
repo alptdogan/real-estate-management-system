@@ -29,15 +29,15 @@
         </div>
 
         <div class="form-group row">
-            <input type="text" placeholder="Email Address" th:field="${realEstate.realEstateType}">
+            <input type="text" placeholder="Email Address" th:field="${realEstate.eRealEstateType}">
         </div>
 
         <div class="form-group row">
-            <input type="text" placeholder="First Name" th:field="${realEstate.saleOrRent}">
+            <input type="text" placeholder="First Name" th:field="${realEstate.eSaleOrRent}">
         </div>
 
         <div class="form-group row">
-            <input type="text" placeholder="Last Name" th:field="${realEstate.town}">
+            <input type="text" placeholder="Last Name" th:field="${realEstate.eTown}">
         </div>
 
         <div class="form-group row">
@@ -56,17 +56,22 @@
             <input type="text" placeholder="Email Address" th:field="${realEstate.floorNo}">
         </div>
 
+<!--        bu şekilde client girmemek için form açmaya çalışacağım. aşağıdaki yorumdaki form gibi.-->
         <div class="form-group row">
-            <select th:field="*{clientResponseDtos}" multiple="multiple">
-                <option th:each = "clientResponseDtos : ${allClients}"
-                        th:value = "${clientResponseDtos.clientId}"
-                        th:text = "${clientResponseDtos.firstName}"
-                        th:text = "${clientResponseDtos.lastName}"
-                        th:text = "${clientResponseDtos.phoneNumber}"
-                        th:text = "${clientResponseDtos.emailAddress}">
-                </option>
-            </select>
+            <input type="text" placeholder="Owner" th:field="${realEstate.client}">
         </div>
+
+<!--        <div class="form-group row">-->
+<!--            <select th:field="*{clientResponseDtos}" multiple="multiple">-->
+<!--                <option th:each = "clientResponseDtos : ${allClients}"-->
+<!--                        th:value = "${clientResponseDtos.clientId}"-->
+<!--                        th:text = "${clientResponseDtos.firstName}"-->
+<!--                        th:text = "${clientResponseDtos.lastName}"-->
+<!--                        th:text = "${clientResponseDtos.phoneNumber}"-->
+<!--                        th:text = "${clientResponseDtos.emailAddress}">-->
+<!--                </option>-->
+<!--            </select>-->
+<!--        </div>-->
 
                 <button class="btn btn-info col-2" type="submit">Create Real Estate</button>
 

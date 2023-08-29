@@ -54,10 +54,9 @@
             <td th:text="${aRealEstate.floorNo}"/>
             <td th:text="${aRealEstate.clientId}"/>
             <td>
-
-                <a th:href="@{/realEstates/details/(realEstateId=${aRealEstate.realEstateId})}"
-                   class="btn btn-success btn-sm">
-                    Detail
+                <a th:href="@{/realEstates/updateRealEstateForm}"
+                   class="btn btn-info btn-sm">
+                    Update
                 </a>
 
             </td>
