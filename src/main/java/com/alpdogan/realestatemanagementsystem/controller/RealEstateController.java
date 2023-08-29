@@ -2,30 +2,48 @@ package com.alpdogan.realestatemanagementsystem.controller;
 
 import com.alpdogan.realestatemanagementsystem.dto.request.SaveRealEstateRequestDto;
 import com.alpdogan.realestatemanagementsystem.dto.request.UpdateRealEstateRequestDto;
+import com.alpdogan.realestatemanagementsystem.dto.response.ClientResponseDto;
 import com.alpdogan.realestatemanagementsystem.dto.response.RealEstateResponseDto;
-import com.alpdogan.realestatemanagementsystem.entity.ERealEstateType;
-import com.alpdogan.realestatemanagementsystem.entity.ESaleOrRent;
-import com.alpdogan.realestatemanagementsystem.entity.ETown;
-import com.alpdogan.realestatemanagementsystem.entity.RealEstate;
+import com.alpdogan.realestatemanagementsystem.entity.*;
+import com.alpdogan.realestatemanagementsystem.service.ClientService;
 import com.alpdogan.realestatemanagementsystem.service.RealEstateService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/realEstates")
 public class RealEstateController {
 
     private RealEstateService realEstateService;
+    private ClientService clientService;
 
-    public RealEstateController(RealEstateService realEstateService) {
+    public RealEstateController(RealEstateService realEstateService, ClientService clientService) {
         this.realEstateService = realEstateService;
+        this.clientService = clientService;
     }
 
     @PostMapping("/addRealEstate")
-    public RealEstate addRealEstate(@RequestBody SaveRealEstateRequestDto saveRealEstateRequestDto) {
-        return realEstateService.saveRealEstate(saveRealEstateRequestDto);
+    public String addRealEstate(@ModelAttribute("realEstate") SaveRealEstateRequestDto saveRealEstateRequestDto,
+                                    @RequestParam List<Integer> clients) {
+        realEstateService.saveRealEstate(saveRealEstateRequestDto);
+        return "redirect:/realEstates";
+    }
+
+    @GetMapping("/new")
+    public String displayRealEstateForm (Model model) {
+
+        RealEstate realEstate = new RealEstate();
+        List<ClientResponseDto> clientResponseDtos = clientService.getAllClients();
+
+        model.addAttribute("realEstate", realEstate);
+        model.addAttribute("allClients", clientResponseDtos);
+
+        return "real-estate-new";
+
     }
 
     @GetMapping("{realEstateId}")
@@ -34,8 +52,12 @@ public class RealEstateController {
     }
 
     @GetMapping
-    public List<RealEstateResponseDto> getAllRealEstates() {
-        return realEstateService.getAllRealEstates();
+    public String getAllRealEstates(Model model) {
+
+        List<RealEstateResponseDto> realEstateResponseDtos = realEstateService.getAllRealEstates();
+        model.addAttribute("realEstate", realEstateResponseDtos);
+
+        return "real-estate-list";
     }
 
     @PutMapping("/updateRealEstateById")
@@ -46,6 +68,16 @@ public class RealEstateController {
     @DeleteMapping("/{realEstateId}")
     public void deleteRealEstateById(@PathVariable int realEstateId) {
         realEstateService.deleteRealEstateById(realEstateId);
+    }
+
+    @GetMapping("/details")
+    public String displayTherapistDetails(@RequestParam("realEstateId") int realEstateId, Model model) {
+
+        Optional<RealEstate> realEstate = realEstateService.getRealEstateById(realEstateId);
+        model.addAttribute("realEstate", realEstate);
+
+        return "real-estate-details";
+
     }
 
     @GetMapping("/numberOfRooms/{numberOfRooms}")
