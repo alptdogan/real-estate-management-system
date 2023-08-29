@@ -21,57 +21,44 @@
     <form th:action="@{/realEstates/addRealEstate}" th:object="${realEstate}" method="POST">
 
         <div class="form-group row">
-            <input type="text" placeholder="First Name" th:field="${realEstate.price}">
+            <input type="text" placeholder="Price" th:field="${realEstate.price}">
         </div>
 
         <div class="form-group row">
-            <input type="text" placeholder="Last Name" th:field="${realEstate.advertTitle}">
+            <input type="text" placeholder="Title" th:field="${realEstate.advertTitle}">
         </div>
 
         <div class="form-group row">
-            <input type="text" placeholder="Email Address" th:field="${realEstate.eRealEstateType}">
+            <input type="text" placeholder="Type" th:field="${realEstate.eRealEstateType}">
         </div>
 
         <div class="form-group row">
-            <input type="text" placeholder="First Name" th:field="${realEstate.eSaleOrRent}">
+            <input type="text" placeholder="For Sale/To Rent" th:field="${realEstate.eSaleOrRent}">
         </div>
 
         <div class="form-group row">
-            <input type="text" placeholder="Last Name" th:field="${realEstate.eTown}">
+            <input type="text" placeholder="Town" th:field="${realEstate.eTown}">
         </div>
 
         <div class="form-group row">
-            <input type="text" placeholder="Email Address" th:field="${realEstate.realEstateAddress}">
+            <input type="text" placeholder="Address" th:field="${realEstate.realEstateAddress}">
         </div>
 
         <div class="form-group row">
-            <input type="text" placeholder="First Name" th:field="${realEstate.squareMeters}">
+            <input type="text" placeholder="Square Meters" th:field="${realEstate.squareMeters}">
         </div>
 
         <div class="form-group row">
-            <input type="text" placeholder="Last Name" th:field="${realEstate.numberOfRooms}">
+            <input type="text" placeholder="Number of Rooms" th:field="${realEstate.numberOfRooms}">
         </div>
 
         <div class="form-group row">
-            <input type="text" placeholder="Email Address" th:field="${realEstate.floorNo}">
+            <input type="text" placeholder="Floor Number" th:field="${realEstate.floorNo}">
         </div>
 
-<!--        bu şekilde client girmemek için form açmaya çalışacağım. aşağıdaki yorumdaki form gibi.-->
         <div class="form-group row">
-            <input type="text" placeholder="Owner" th:field="${realEstate.client}">
+            <input type="text" placeholder="Owner ID" th:field="${realEstate.client.clientId}">
         </div>
-
-<!--        <div class="form-group row">-->
-<!--            <select th:field="*{clientResponseDtos}" multiple="multiple">-->
-<!--                <option th:each = "clientResponseDtos : ${allClients}"-->
-<!--                        th:value = "${clientResponseDtos.clientId}"-->
-<!--                        th:text = "${clientResponseDtos.firstName}"-->
-<!--                        th:text = "${clientResponseDtos.lastName}"-->
-<!--                        th:text = "${clientResponseDtos.phoneNumber}"-->
-<!--                        th:text = "${clientResponseDtos.emailAddress}">-->
-<!--                </option>-->
-<!--            </select>-->
-<!--        </div>-->
 
                 <button class="btn btn-info col-2" type="submit">Create Real Estate</button>
 
