@@ -1,6 +1,5 @@
 package com.alpdogan.realestatemanagementsystem.controller;
 
-import com.alpdogan.realestatemanagementsystem.dto.request.SaveRealEstateRequestDto;
 import com.alpdogan.realestatemanagementsystem.dto.response.ClientResponseDto;
 import com.alpdogan.realestatemanagementsystem.dto.response.RealEstateResponseDto;
 import com.alpdogan.realestatemanagementsystem.entity.*;
@@ -25,9 +24,10 @@ public class RealEstateController {
         this.clientService = clientService;
     }
 
+    // thymeleaf'te saverequestdto ile işlem yaptıramadaım maalesef. direkt entity kullanmak üzere burayı ver servisi güncelledim.
     @PostMapping("/addRealEstate")
-    public String addRealEstate(@ModelAttribute("realEstate") SaveRealEstateRequestDto saveRealEstateRequestDto) {
-        realEstateService.saveRealEstate(saveRealEstateRequestDto);
+    public String addRealEstate(@ModelAttribute("realEstate") RealEstate realEstate) {
+        realEstateService.saveRealEstate(realEstate);
         return "redirect:/realEstates";
     }
 

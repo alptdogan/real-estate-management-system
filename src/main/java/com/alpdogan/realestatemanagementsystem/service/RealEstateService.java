@@ -26,32 +26,32 @@ public class RealEstateService {
         this.clientRepository = clientRepository;
     }
 
-    public RealEstate saveRealEstate(SaveRealEstateRequestDto saveRealEstateRequestDto){
+    public RealEstate saveRealEstate(RealEstate realEstate){
 
-        String advertTitleRequest = saveRealEstateRequestDto.getAdvertTitle();
-        String realEstateAddressRequest = saveRealEstateRequestDto.getRealEstateAddress();
-        int squareMetersRequest = saveRealEstateRequestDto.getSquareMeters();
-        int numberOfRoomsRequest = saveRealEstateRequestDto.getNumberOfRooms();
-        int floorNoRequest = saveRealEstateRequestDto.getFloorNo();
-        int priceRequest = saveRealEstateRequestDto.getPrice();
-        int clientIdRequest = saveRealEstateRequestDto.getClientId();
-        String realEstateTypeRequest = saveRealEstateRequestDto.getRealEstateType();
-        String saleOrRentRequest = saveRealEstateRequestDto.getSaleOrRent();
-        String townRequest = saveRealEstateRequestDto.getTown();
+        String advertTitleRequest = realEstate.getAdvertTitle();
+        String realEstateAddressRequest = realEstate.getRealEstateAddress();
+        int squareMetersRequest = realEstate.getSquareMeters();
+        int numberOfRoomsRequest = realEstate.getNumberOfRooms();
+        int floorNoRequest = realEstate.getFloorNo();
+        int priceRequest = realEstate.getPrice();
+        int clientIdRequest = realEstate.getClient().getClientId();
+        String realEstateTypeRequest = realEstate.getERealEstateType().toString();
+        String saleOrRentRequest = realEstate.getESaleOrRent().toString();
+        String townRequest = realEstate.getETown().toString();
 
-        RealEstate realEstate = new RealEstate();
+        RealEstate newrealEstate = new RealEstate();
         Client client = clientRepository.findById(clientIdRequest).get();
 
-        realEstate.setAdvertTitle(advertTitleRequest);
-        realEstate.setRealEstateAddress(realEstateAddressRequest);
-        realEstate.setSquareMeters(squareMetersRequest);
-        realEstate.setNumberOfRooms(numberOfRoomsRequest);
-        realEstate.setFloorNo(floorNoRequest);
-        realEstate.setPrice(priceRequest);
-        realEstate.setClient(client);
-        realEstate.setERealEstateType(ERealEstateType.valueOf(realEstateTypeRequest));
-        realEstate.setESaleOrRent(ESaleOrRent.valueOf(saleOrRentRequest));
-        realEstate.setETown(ETown.valueOf(townRequest));
+        newrealEstate.setAdvertTitle(advertTitleRequest);
+        newrealEstate.setRealEstateAddress(realEstateAddressRequest);
+        newrealEstate.setSquareMeters(squareMetersRequest);
+        newrealEstate.setNumberOfRooms(numberOfRoomsRequest);
+        newrealEstate.setFloorNo(floorNoRequest);
+        newrealEstate.setPrice(priceRequest);
+        newrealEstate.setClient(client);
+        newrealEstate.setERealEstateType(ERealEstateType.valueOf(realEstateTypeRequest));
+        newrealEstate.setESaleOrRent(ESaleOrRent.valueOf(saleOrRentRequest));
+        newrealEstate.setETown(ETown.valueOf(townRequest));
 
         return realEstateRepository.save(realEstate);
     }
