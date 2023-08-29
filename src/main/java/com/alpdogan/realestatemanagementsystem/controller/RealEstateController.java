@@ -1,7 +1,6 @@
 package com.alpdogan.realestatemanagementsystem.controller;
 
 import com.alpdogan.realestatemanagementsystem.dto.request.SaveRealEstateRequestDto;
-import com.alpdogan.realestatemanagementsystem.dto.request.UpdateRealEstateRequestDto;
 import com.alpdogan.realestatemanagementsystem.dto.response.ClientResponseDto;
 import com.alpdogan.realestatemanagementsystem.dto.response.RealEstateResponseDto;
 import com.alpdogan.realestatemanagementsystem.entity.*;
@@ -60,24 +59,22 @@ public class RealEstateController {
         return "real-estate-list";
     }
 
-    @PutMapping("/updateRealEstateById")
-    public RealEstate updateRealEstateById(@RequestBody UpdateRealEstateRequestDto updateRealEstateRequestDto) {
-        return realEstateService.updateRealEstateById(updateRealEstateRequestDto);
+    @GetMapping("/updateRealEstateForm")
+    public String updateRealEstateForm(Model model) {
+
+        RealEstate realEstate = new RealEstate();
+        List<ClientResponseDto> clientResponseDtos = clientService.getAllClients();
+
+        model.addAttribute("realEstate", realEstate);
+        model.addAttribute("allClients", clientResponseDtos);
+
+        return "real-estate-new";
+
     }
 
     @DeleteMapping("/{realEstateId}")
     public void deleteRealEstateById(@PathVariable int realEstateId) {
         realEstateService.deleteRealEstateById(realEstateId);
-    }
-
-    @GetMapping("/details")
-    public String displayTherapistDetails(@RequestParam("realEstateId") int realEstateId, Model model) {
-
-        Optional<RealEstate> realEstate = realEstateService.getRealEstateById(realEstateId);
-        model.addAttribute("realEstate", realEstate);
-
-        return "real-estate-details";
-
     }
 
     @GetMapping("/numberOfRooms/{numberOfRooms}")
