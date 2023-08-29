@@ -32,6 +32,10 @@
                        th:href="@{/realEstates}" class="nav-link">Real Estates</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a  th:classappend="${#httpServletRequest.getRequestURI() == '/realEstates/find' ? 'active':''}"
+                        th:href="@{/realEstates/find}" class="nav-link">Search Real Estates</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
                     <a  th:classappend="${#httpServletRequest.getRequestURI() == '/clients' ? 'active':''}"
                         th:href="@{/clients}" class="nav-link">Clients</a>
                 </li>
