@@ -26,8 +26,7 @@ public class RealEstateController {
     }
 
     @PostMapping("/addRealEstate")
-    public String addRealEstate(@ModelAttribute("realEstate") SaveRealEstateRequestDto saveRealEstateRequestDto,
-                                    @RequestParam List<Integer> clients) {
+    public String addRealEstate(@ModelAttribute("realEstate") SaveRealEstateRequestDto saveRealEstateRequestDto) {
         realEstateService.saveRealEstate(saveRealEstateRequestDto);
         return "redirect:/realEstates";
     }
