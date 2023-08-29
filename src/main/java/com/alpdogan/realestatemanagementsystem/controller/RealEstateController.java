@@ -76,14 +76,57 @@ public class RealEstateController {
         realEstateService.deleteRealEstateById(realEstateId);
     }
 
+
+    @GetMapping("/find")
+    public String FindForm(Model model)
+    {
+        model.addAttribute("realEstate", new RealEstate());
+        return "search";
+    }
+
+    @GetMapping("/searchByTown")
+    public String searchByTown(@RequestParam ETown town, Model model) {
+
+        List<RealEstateResponseDto> searchResults;
+
+        if (town != null) {
+            searchResults = realEstateService.getRealEstatesByTown(town);
+        }else {
+            return "redirect:/realEstates";
+        }
+
+        model.addAttribute("realEstate", searchResults);
+        return "search-list";
+
+    }
+
+//    @GetMapping("/searchBySquareMetersAndTown")
+//    public String searchBySquareMetersAndTown(@RequestParam int squareMeters, @RequestParam ETown town, Model model) {
+//
+//        List<RealEstateResponseDto> searchResults;
+//
+//        if (squareMeters != 0 && town != null) {
+//            searchResults = realEstateService.getRealEstatesBySquareMetersAndTown(squareMeters, town);
+//        } else if (squareMeters != 0) {
+//            searchResults = realEstateService.getRealEstateBySquareMeters(squareMeters);
+//        } else if (town != null) {
+//            searchResults = realEstateService.getRealEstateByTown(town);
+//        } else {
+//            return "redirect:/realEstates";
+//        }
+//
+//        model.addAttribute("realEstate", searchResults);
+//        return "search";
+//    }
+
+
+
+
+
+
     @GetMapping("/numberOfRooms/{numberOfRooms}")
     public List<RealEstate> getRealEstateByNumberOfRooms(@PathVariable int numberOfRooms) {
         return realEstateService.getRealEstateByNumberOfRooms(numberOfRooms);
-    }
-
-    @GetMapping("/squareMeters/{squareMeters}")
-    public List<RealEstate> getRealEstateBySquareMeters(@PathVariable int squareMeters) {
-        return realEstateService.getRealEstateBySquareMeters(squareMeters);
     }
 
     @GetMapping("/floorNo/{floorNo}")
@@ -106,10 +149,10 @@ public class RealEstateController {
         return realEstateService.getRealEstateBySaleOrRent(saleOrRent);
     }
 
-    @GetMapping("/town/{town}")
-    public List<RealEstateResponseDto> getRealEstateByTown(@PathVariable ETown town) {
-        return realEstateService.getRealEstateByTown(town);
-    }
+//    @GetMapping("/town/{town}")
+//    public List<RealEstateResponseDto> getRealEstateByTown(@PathVariable ETown town) {
+//        return realEstateService.getRealEstateByTown(town);
+//    }
 
     @GetMapping("/getRealEstatesByItsEnumeratedProperties")
     public List<RealEstateResponseDto> getRealEstatesByItsEnumeratedProperties(@RequestParam ERealEstateType eRealEstateType,
