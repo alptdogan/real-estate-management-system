@@ -7,8 +7,10 @@ import com.alpdogan.realestatemanagementsystem.service.ClientService;
 import com.alpdogan.realestatemanagementsystem.service.RealEstateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +26,7 @@ public class RealEstateController {
         this.clientService = clientService;
     }
 
-    // thymeleaf'te saverequestdto ile işlem yaptıramadaım maalesef. direkt entity kullanmak üzere burayı ver servisi güncelledim.
+    // thymeleaf'te saverequestdto ile işlem yaptıramadım maalesef. direkt entity kullanmak üzere burayı ve servisi güncelledim.
     @PostMapping("/addRealEstate")
     public String addRealEstate(@ModelAttribute("realEstate") RealEstate realEstate) {
         realEstateService.saveRealEstate(realEstate);
@@ -84,21 +86,39 @@ public class RealEstateController {
         return "search";
     }
 
-    @GetMapping("/searchByTown")
-    public String searchByTown(@RequestParam ETown town, Model model) {
+    @GetMapping("/searchByNumberOfRooms")
+    public String RealEstateFindForm(RealEstate realEstate, BindingResult result, Model model) {
 
-        List<RealEstateResponseDto> searchResults;
+        Collection<RealEstate> results = realEstateService.getRealEstateByNumberOfRooms(realEstate.getNumberOfRooms());
 
-        if (town != null) {
-            searchResults = realEstateService.getRealEstatesByTown(town);
+        if (results.size() < 1) {
+            result.rejectValue("numberOfRooms", "notFound", "Not Found");
+            return "search";
+        }else if (results.size() >= 1) {
+            model.addAttribute("selections", results);
+            return "search-list";
         }else {
-            return "redirect:/realEstates";
+            realEstate = results.iterator().next();
+            return "redirect:/realEstates/" + realEstate.getRealEstateId();
         }
 
-        model.addAttribute("realEstate", searchResults);
-        return "search-list";
-
     }
+
+//    @GetMapping("/searchByTown")
+//    public String searchByTown(@RequestParam ETown town, Model model) {
+//
+//        List<RealEstate> results;
+//
+//        if (town.toString().isEmpty()) {
+//            return "redirect:/realEstates";
+//        }else {
+//            results = realEstateService.getRealEstatesByTown(town);
+//        }
+//
+//        model.addAttribute("selections", results);
+//        return "search-list";
+//
+//    }
 
 //    @GetMapping("/searchBySquareMetersAndTown")
 //    public String searchBySquareMetersAndTown(@RequestParam int squareMeters, @RequestParam ETown town, Model model) {
@@ -118,11 +138,6 @@ public class RealEstateController {
 //        model.addAttribute("realEstate", searchResults);
 //        return "search";
 //    }
-
-
-
-
-
 
     @GetMapping("/numberOfRooms/{numberOfRooms}")
     public List<RealEstate> getRealEstateByNumberOfRooms(@PathVariable int numberOfRooms) {
