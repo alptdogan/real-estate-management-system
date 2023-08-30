@@ -57,8 +57,8 @@ public interface RealEstateRepository extends JpaRepository<RealEstate, Integer>
                                                     @Param("eTown") ETown town);
 
 
-    @Query("SELECT re FROM RealEstate re WHERE re.eTown = :eTown")
-    List<RealEstateResponseDto> searchByTown(@Param("eTown") ETown eTown);
+//    @Query("SELECT re FROM RealEstate re WHERE re.eTown = :eTown")
+//    List<RealEstate> searchByTown(@Param("eTown") ETown eTown);
 
 }
 
