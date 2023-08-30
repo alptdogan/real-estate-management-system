@@ -37,35 +37,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="aRealEstate: ${realEstate}">
+        <tr th:each="aRealEstate: ${selections}">
             <td th:text="${aRealEstate.price}"/>
             <td th:text="${aRealEstate.advertTitle}"/>
-            <td th:text="${aRealEstate.realEstateType}"/>
-            <td th:text="${aRealEstate.saleOrRent}"/>
-            <td th:text="${aRealEstate.town}"/>
+            <td th:text="${aRealEstate.eRealEstateType}"/>
+            <td th:text="${aRealEstate.eSaleOrRent}"/>
+            <td th:text="${aRealEstate.eTown}"/>
             <td th:text="${aRealEstate.realEstateAddress}"/>
             <td th:text="${aRealEstate.squareMeters}"/>
             <td th:text="${aRealEstate.numberOfRooms}"/>
             <td th:text="${aRealEstate.floorNo}"/>
             <td th:text="${aRealEstate.clientId}"/>
-            <td>
-<!--                <a th:href="@{/owner/update(id=${aOwner.id})}"-->
-<!--                   class="btn btn-info btn-sm">-->
-<!--                    Update-->
-<!--                </a>-->
-
-<!--                <a th:href="@{/owner/delete/(id=${aOwner.id})}"-->
-<!--                   class="btn btn-danger btn-sm"-->
-<!--                   onClick="if (!(confirm('Are you sure you want to delete this owner?'))) return false">-->
-<!--                    Delete-->
-<!--                </a>-->
-
-<!--                <a th:href="@{/owner/{id}(id=${aOwner.id})}"-->
-<!--                   class="btn btn-success btn-sm">-->
-<!--                    Detail-->
-<!--                </a>-->
-
-            </td>
         </tr>
         </tbody>
     </table>
