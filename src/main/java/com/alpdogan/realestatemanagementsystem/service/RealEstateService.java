@@ -115,9 +115,9 @@ public class RealEstateService {
         return realEstateRepository.searchByNumberOfRooms(numberOfRooms);
     }
 
-    public List<RealEstateResponseDto> getRealEstatesByTown(ETown town) {
-        return realEstateRepository.searchByTown(town);
-    }
+//    public List<RealEstate> getRealEstatesByTown(ETown town) {
+//        return realEstateRepository.searchByTown(town);
+//    }
 
 
 
