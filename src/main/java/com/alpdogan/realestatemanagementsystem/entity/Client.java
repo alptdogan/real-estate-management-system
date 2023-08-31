@@ -29,17 +29,4 @@ public class Client {
     @Column(name = "email_address")
     private String emailAddress;
 
-//    @OneToMany
-//    @JsonIgnore
-//    private List<RealEstate> realEstates = new ArrayList<>();
-
-//    @OneToMany(fetch = FetchType.LAZY, cascade = {
-//            CascadeType.PERSIST,
-//            CascadeType.MERGE,
-//            CascadeType.DETACH,
-//            CascadeType.REFRESH
-//    })
-//    @Column(name = "real_estates")
-//    private List<RealEstate> realEstates = new ArrayList<>();
-
 }

@@ -16,9 +16,6 @@ public interface RealEstateRepository extends JpaRepository<RealEstate, Integer>
     @Query("SELECT re FROM RealEstate re WHERE re.numberOfRooms = :numberOfRooms")
     List<RealEstate> searchByNumberOfRooms(@Param("numberOfRooms") int numberOfRooms);
 
-//    @Query("SELECT re FROM RealEstate re WHERE re.squareMeters = :squareMeters")
-//    List<RealEstateResponseDto> searchBySquareMeters(@Param("squareMeters") int squareMeters);
-
     @Query("SELECT re FROM RealEstate re WHERE re.floorNo = :floorNo")
     List<RealEstate> searchByFloorNo(@Param("floorNo") int floorNo);
 
@@ -30,9 +27,6 @@ public interface RealEstateRepository extends JpaRepository<RealEstate, Integer>
 
     @Query("SELECT re FROM RealEstate re WHERE re.eSaleOrRent = :eSaleOrRent")
     List<RealEstate> searchBySaleOrRent(@Param("eSaleOrRent") ESaleOrRent eSaleOrRent);
-
-//    @Query("SELECT re FROM RealEstate re WHERE re.eTown = :eTown")
-//    List<RealEstate> searchByTown(@Param("eTown") ETown eTown);
 
     @Query("SELECT re FROM RealEstate re " +
             "WHERE re.eRealEstateType = :eRealEstateType " +
@@ -55,10 +49,6 @@ public interface RealEstateRepository extends JpaRepository<RealEstate, Integer>
                                                     @Param("eRealEstateType") ERealEstateType realEstateType,
                                                     @Param("eSaleOrRent") ESaleOrRent saleOrRent,
                                                     @Param("eTown") ETown town);
-
-
-//    @Query("SELECT re FROM RealEstate re WHERE re.eTown = :eTown")
-//    List<RealEstate> searchByTown(@Param("eTown") ETown eTown);
 
 }
 

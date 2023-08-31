@@ -4,7 +4,6 @@ import com.alpdogan.realestatemanagementsystem.dto.request.SaveClientRequestDto;
 import com.alpdogan.realestatemanagementsystem.dto.response.ClientResponseDto;
 import com.alpdogan.realestatemanagementsystem.entity.Client;
 import com.alpdogan.realestatemanagementsystem.repository.ClientRepository;
-import com.alpdogan.realestatemanagementsystem.repository.RealEstateRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 

@@ -115,16 +115,6 @@ public class RealEstateService {
         return realEstateRepository.searchByNumberOfRooms(numberOfRooms);
     }
 
-//    public List<RealEstate> getRealEstatesByTown(ETown town) {
-//        return realEstateRepository.searchByTown(town);
-//    }
-
-
-
-//    public List<RealEstateResponseDto> getRealEstateBySquareMeters(int squareMeters) {
-//        return realEstateRepository.searchBySquareMeters(squareMeters);
-//    }
-
     public List<RealEstate> getRealEstateByFloorNo(int floorNo) {
         return realEstateRepository.searchByFloorNo(floorNo);
     }
@@ -160,20 +150,6 @@ public class RealEstateService {
         return typeRealEstateResponseDtos;
 
     }
-
-//    public List<RealEstateResponseDto> getRealEstateByTown(ETown town) {
-//
-//        Iterable<RealEstate> realEstates = realEstateRepository.searchByTown(town);
-//        List<RealEstateResponseDto> typeRealEstateResponseDtos = new ArrayList<>();
-//
-//        for(RealEstate realEstate : realEstates) {
-//            RealEstateResponseDto typeRealEstateResponseDto = modelMapper.map(realEstate, RealEstateResponseDto.class);
-//            typeRealEstateResponseDtos.add(typeRealEstateResponseDto);
-//        }
-//
-//        return typeRealEstateResponseDtos;
-//
-//    }
 
     public List<RealEstateResponseDto> getRealEstatesByItsEnumeratedProperties(ERealEstateType eRealEstateType, ESaleOrRent saleOrRent, ETown town) {
 
