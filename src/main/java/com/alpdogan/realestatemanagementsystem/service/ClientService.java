@@ -15,15 +15,11 @@ import java.util.Optional;
 @Service
 public class ClientService {
 
-    //update eklenebilir.
-
     private ClientRepository clientRepository;
-    private RealEstateRepository realEstateRepository;
     private ModelMapper modelMapper;
 
-    public ClientService(ClientRepository clientRepository, RealEstateRepository realEstateRepository, ModelMapper modelMapper) {
+    public ClientService(ClientRepository clientRepository, ModelMapper modelMapper) {
         this.clientRepository = clientRepository;
-        this.realEstateRepository = realEstateRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -33,16 +29,13 @@ public class ClientService {
         String lastNameRequest = saveClientRequestDto.getLastName();
         Long phoneNumberRequest = saveClientRequestDto.getPhoneNumber();
         String emailAddressRequest = saveClientRequestDto.getEmailAddress();
-//        int realEstateIdRequest = saveClientRequestDto.getRealEstateId();
 
-//        RealEstate realEstate = realEstateRepository.findById(realEstateIdRequest).get();
         Client client = new Client();
 
         client.setFirstName(firstNameRequest);
         client.setLastName(lastNameRequest);
         client.setPhoneNumber(phoneNumberRequest);
         client.setEmailAddress(emailAddressRequest);
-//        client.setRealEstates(Collections.singletonList(realEstate));
 
         return clientRepository.save(client);
 
