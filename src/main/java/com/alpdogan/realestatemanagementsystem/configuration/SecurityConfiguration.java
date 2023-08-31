@@ -22,22 +22,15 @@ public class SecurityConfiguration {
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
 
-//        UserDetails client = User.withDefaultPasswordEncoder()
-//                .username("client")
-//                .password("client")
-//                .roles("CLIENT")
-//                .build();
         UserDetails admin = User.withDefaultPasswordEncoder()
                 .username("admin")
                 .password("admin")
                 .roles("ADMIN")
                 .build();
-//        return new InMemoryUserDetailsManager(client, admin);
         return new InMemoryUserDetailsManager(admin);
 
     }
 
-    // home, login ve dashboard sayfaları oluşturulacak. sonrasında uzantılara kısıtlamalar atayacağım.
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
